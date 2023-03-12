@@ -62,6 +62,7 @@ def pregunta_02():
     answer = []
     for i in range(len(list_letters)):
         answer.append((list_letters[i], list_all_letters.count(list_letters[i])))
+
     return answer
 
 
