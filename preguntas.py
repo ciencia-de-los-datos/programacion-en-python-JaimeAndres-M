@@ -51,7 +51,18 @@ def pregunta_02():
     ]
 
     """
-    return
+    list_all_letters = []
+    for i in range(len(data)):
+        list_all_letters.append(data[i][0])
+
+    list_letters = list(dict.fromkeys(list_all_letters))
+    list_letters = [i.split("\t")[0] for i in list_letters]
+    list_letters.sort()
+
+    answer = []
+    for i in range(len(list_letters)):
+        answer.append((list_letters[i], list_all_letters.count(list_letters[i])))
+    return answer
 
 
 def pregunta_03():
