@@ -21,6 +21,13 @@ data = [line.replace("\n", "") for line in data]
 # Conversión de los strings a listas
 data = [line.split("\t") for line in data]
 
+
+lst = []
+with open("data.csv") as f:
+    lines = f.readlines()
+    for i in lines:
+        lst.append(i.replace("\n", ""))
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -81,7 +88,27 @@ def pregunta_03():
     ]
 
     """
-    return
+
+    column1 = []
+    for i in range(len(data)):
+        column1.append(data[i][0])
+
+    column2 = []
+    for i in range(len(data)):
+        column2.append(data[i][1])
+
+    rr = []
+    [rr.append(j) for j in column1 if j not in rr]
+    rr.sort()
+    dc = {key: 0 for key in rr}
+    cc = 0
+    for i in column1:
+        u = column2[cc]
+        a = int(u) + int(dc.get(i))
+        dc[i] = a
+        cc = cc + 1
+    answer = list(dc.items())
+    return answer
 
 
 def pregunta_04():
@@ -106,8 +133,20 @@ def pregunta_04():
     ]
 
     """
-    return
 
+    aux1 = []
+    aux2 = []
+    aux1 = [i.split("\t")[2] for i in lst]
+    aux2 = [i.split("-")[1] for i in aux1]
+    rr = []
+    [rr.append(j) for j in aux2 if j not in rr]
+    rr.sort()
+    dc = {key: 0 for key in rr}
+    for i in aux2:
+        a = int(dc.get(i))+1
+        dc[i] = a
+    dct = list(dc.items())
+    return dct
 
 def pregunta_05():
     """
@@ -124,7 +163,23 @@ def pregunta_05():
     ]
 
     """
-    return
+
+    ltr = [i.split("\t")[0] for i in lst]
+    num = [i.split("\t")[1] for i in lst]
+    k = []
+    [k.append(i) for i in ltr if i not in k]
+    k.sort()
+    dc = {key:[] for key in k}
+    c = 0
+    lista_final = []
+    for i in ltr:
+        dc[i].append(num[c])
+        c += 1
+    for i in k:
+        a = (i,int(max(dc[i])),int(min(dc[i])))
+        lista_final.append(a)
+    return lista_final
+
 
 
 def pregunta_06():
@@ -149,7 +204,34 @@ def pregunta_06():
     ]
 
     """
-    return
+
+    dicC = [i.split("\t")[4] for i in lst]
+    dicC = [i.split(",") for i in dicC]
+    g = []
+    for i in dicC:
+        g.extend(i)
+    dicC = [i.split(":") for i in g]
+    g = []
+    for i in dicC:
+        g.extend(i)
+    a = []
+    c = 0
+    for i in g:
+        if c%2 == 0:
+            a.append(i)
+        c += 1
+    aL = []
+    [aL.append(j) for j in a if j not in aL]
+    aL.sort()
+    dc = {k:[] for k in aL}
+    for i in dicC:
+        dc[i[0]].append(int(i[1]))
+    lista_final = []
+    for i in aL:
+        a = (i, min(dc[i]),max(dc[i]))
+        lista_final.append(a)
+        
+    return lista_final
 
 
 def pregunta_07():
